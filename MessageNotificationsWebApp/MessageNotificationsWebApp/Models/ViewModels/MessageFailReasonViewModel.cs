@@ -6,9 +6,9 @@ using System.Web;
 
 namespace MessageNotificationsWebApp.Models
 {
-    public class MessageFailReason
+    public class MessageFailReasonViewModel
     {
-        public HttpStatusCode Code { get; set; }
+        public int Code { get; set; }
         public string Detail { get; set; }
         public bool PermanentFailure { get; set; }
     }
