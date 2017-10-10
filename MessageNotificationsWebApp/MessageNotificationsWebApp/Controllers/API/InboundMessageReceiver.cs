@@ -11,11 +11,15 @@ namespace MessageNotificationsWebApp.Controllers.API
 {
     public class InboundMessageReceiver : ApiController
     {
-        public dynamic Get()
+        public IEnumerable<InboundMessage> Get()
         {
-            return new NotImplementedException();
+            using (var context = new MessageNotificationsContainer())
+            {
+                return context.InboundMessages.ToList();
+            }
         }
 
+        [HttpPost]
         public HttpResponseMessage Post(InboundMessage receivedMessage)
         {
             using (var context = new MessageNotificationsContainer())

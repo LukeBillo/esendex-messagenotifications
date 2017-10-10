@@ -14,6 +14,12 @@ namespace MessageNotificationsWebApp
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                "InboundMessageNotification",
+                "InboundMessages/Notify",
+                new { controller = "InboundMessageReceiver" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
