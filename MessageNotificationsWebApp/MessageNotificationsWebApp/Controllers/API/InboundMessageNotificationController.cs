@@ -1,25 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web;
 using System.Web.Http;
 using MessageNotificationsWebApp.Models;
 
 namespace MessageNotificationsWebApp.Controllers.API
 {
-    public class InboundMessageReceiver : ApiController
+    [RoutePrefix("api/InboundMessages")]
+    public class InboundMessageNotificationController : ApiController
     {
+        [Route("")]
         public IEnumerable<InboundMessage> Get()
         {
             using (var context = new MessageNotificationsContainer())
             {
-                return context.InboundMessages.ToList();
+                return context.InboundMessages.DefaultIfEmpty().ToList();
             }
         }
 
-        [HttpPost]
+        [Route("")]
         public HttpResponseMessage Post(InboundMessage receivedMessage)
         {
             using (var context = new MessageNotificationsContainer())

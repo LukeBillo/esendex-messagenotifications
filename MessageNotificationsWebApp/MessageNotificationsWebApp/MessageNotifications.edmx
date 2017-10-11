@@ -78,7 +78,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="MessageId" Type="Guid" Nullable="false" />
           <Property Name="AccountId" Type="Guid" Nullable="false" />
-          <Property Name="OccurredAt" Type="String" Nullable="false" />
+          <Property Name="OccurredAt" Type="DateTime" Nullable="false" />
           <Property Name="FailureCode" Type="Int32" Nullable="false" />
           <Property Name="FailureDetail" Type="String" Nullable="false" />
           <Property Name="IsPermanentFailure" Type="Boolean" Nullable="false" />

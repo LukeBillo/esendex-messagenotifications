@@ -24,7 +24,9 @@ namespace MessageNotificationsWebApp
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            modelBuilder.Entity<InboundMessage>().HasKey(im => im.MessageId);
+            modelBuilder.Entity<DeliveredMessage>().HasKey(dm => dm.MessageId);
+            modelBuilder.Entity<FailedMessage>().HasKey(fm => fm.MessageId);
         }
     
         public virtual DbSet<InboundMessage> InboundMessages { get; set; }
