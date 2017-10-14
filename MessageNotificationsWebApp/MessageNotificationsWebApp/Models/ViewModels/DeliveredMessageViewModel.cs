@@ -1,20 +1,14 @@
 ﻿using System;
-using MessageNotificationsWebApp.Models.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
-namespace MessageNotificationsWebApp.Models
+namespace MessageNotificationsWebApp.Models.ViewModels
 {
     [Serializable]
-    public class DeliveredMessage
+    public class DeliveredMessageViewModel
     {
-        public DeliveredMessage()
-        {
-            Id = Guid.Empty;
-            MessageId = Guid.Empty;
-            AccountId = Guid.Empty;
-            OccurredAt = DateTime.UtcNow;
-        }
-
-        public DeliveredMessage(DeliveredMessageViewModel deliveredMessage)
+        public DeliveredMessageViewModel(DeliveredMessage deliveredMessage)
         {
             Id = deliveredMessage.Id;
             MessageId = deliveredMessage.MessageId;

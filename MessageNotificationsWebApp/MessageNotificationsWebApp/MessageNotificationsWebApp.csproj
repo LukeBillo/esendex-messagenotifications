@@ -87,6 +87,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -213,19 +214,21 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="MessageNotifications.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MessageNotifications.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="MessageNotifications.Designer.cs">
+    <Compile Include="App_Data\MessageNotifications.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MessageNotifications.edmx</DependentUpon>
     </Compile>
+    <Compile Include="App_Data\MessageNotificationsContext.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MessageNotificationsContext.Context.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DeliveredMessage.cs" />
     <Compile Include="Models\FailedMessage.cs" />
     <Compile Include="Models\InboundMessage.cs" />
+    <Compile Include="Models\ViewModels\DeliveredMessageViewModel.cs" />
+    <Compile Include="Models\ViewModels\InboundMessageViewModel.cs" />
     <Compile Include="Models\ViewModels\MessageFailReasonViewModel.cs" />
     <Compile Include="Models\ViewModels\FailedMessageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -238,11 +241,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="MessageNotifications.Context.tt">
+    <Content Include="App_Data\MessageNotificationsContext.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>MessageNotifications.Context.cs</LastGenOutput>
+      <LastGenOutput>MessageNotificationsContext.Context.cs</LastGenOutput>
+      <DependentUpon>MessageNotifications.edmx</DependentUpon>
     </Content>
-    <Content Include="MessageNotifications.edmx.sql" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -250,11 +253,11 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EntityDeploy Include="MessageNotifications.edmx">
+    <EntityDeploy Include="App_Data\MessageNotifications.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>MessageNotifications.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="MessageNotifications.edmx.diagram">
+    <Content Include="App_Data\MessageNotifications.edmx.diagram">
       <DependentUpon>MessageNotifications.edmx</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\MessageNotifications - Web Deploy.pubxml" />
@@ -285,9 +288,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />

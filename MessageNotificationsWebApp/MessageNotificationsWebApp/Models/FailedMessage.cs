@@ -1,12 +1,21 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace MessageNotificationsWebApp.Models
 {
+    [Serializable]
     public class FailedMessage
     {
+        public FailedMessage()
+        {
+            Id = Guid.Empty;;
+            MessageId = Guid.Empty;
+            AccountId = Guid.Empty;
+            OccurredAt = DateTime.UtcNow;
+            FailureCode = 0;
+            FailureDetail = string.Empty;
+            IsPermanentFailure = false;
+        }
+
         public FailedMessage(FailedMessageViewModel failedMessage)
         {
             Id = failedMessage.Id;

@@ -6,6 +6,7 @@ using System.Web;
 
 namespace MessageNotificationsWebApp.Models
 {
+    [Serializable]
     public class MessageFailReasonViewModel
     {
         public int Code { get; set; }
