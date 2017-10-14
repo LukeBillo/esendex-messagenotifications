@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -6,7 +7,6 @@ using System.Web.Http;
 using MessageNotificationsWebApp.Models;
 using MessageNotificationsWebApp.Data;
 using MessageNotificationsWebApp.Models.ViewModels;
-using Newtonsoft.Json;
 
 namespace MessageNotificationsWebApp.Controllers.API
 {
@@ -28,11 +28,8 @@ namespace MessageNotificationsWebApp.Controllers.API
         }
 
         [Route("")]
-        public HttpResponseMessage Post([FromBody] object inboundMessage)
+        public HttpResponseMessage Post([FromBody]InboundMessageViewModel inboundMessage)
         {
-            var temp = inboundMessage.ToString();
-            var inboundMessageObject = JsonConvert.DeserializeObject<InboundMessage>(temp);
-
             using (var context = new MessageNotificationsContext())
             {
                 context.InboundMessages.Add(new InboundMessage());
