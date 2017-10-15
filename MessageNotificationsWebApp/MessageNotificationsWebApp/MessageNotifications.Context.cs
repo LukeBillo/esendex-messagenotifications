@@ -21,6 +21,11 @@ namespace MessageNotificationsWebApp.Data
         {
         }
     
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            throw new UnintentionalCodeFirstException();
+        }
+    
         public DbSet<DeliveredMessage> DeliveredMessages { get; set; }
         public DbSet<FailedMessage> FailedMessages { get; set; }
         public DbSet<InboundMessage> InboundMessages { get; set; }

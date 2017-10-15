@@ -1,4 +1,5 @@
 ﻿using System;
+using MessageNotificationsWebApp.Models.ViewModels;
 
 namespace MessageNotificationsWebApp.Models
 {
@@ -24,7 +25,7 @@ namespace MessageNotificationsWebApp.Models
             OccurredAt = failedMessage.OccurredAt;
             FailureCode = failedMessage.FailureReason.Code;
             FailureDetail = failedMessage.FailureReason.Detail;
-            IsPermanentFailure = failedMessage.FailureReason.PermanentFailure;
+            IsPermanentFailure = failedMessage.FailureReason.IsPermanentFailure;
         }
 
         public Guid Id { get; set; }

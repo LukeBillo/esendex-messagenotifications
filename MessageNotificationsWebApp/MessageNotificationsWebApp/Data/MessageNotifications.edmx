@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="MessageNotificationsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DeliveredMessages">
           <Key>
             <PropertyRef Name="Id" />
@@ -20,7 +20,7 @@
           </Key>
           <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
           <Property Name="MessageId" Type="uniqueidentifier" />
-          <Property Name="Accoutnid" Type="uniqueidentifier" />
+          <Property Name="AccountId" Type="uniqueidentifier" />
           <Property Name="OccurredAt" Type="datetime" />
           <Property Name="FailureCode" Type="int" />
           <Property Name="FailureDetail" Type="nvarchar(max)" />
@@ -37,7 +37,7 @@
           <Property Name="Sender" Type="nvarchar(max)" />
           <Property Name="Recipient" Type="nvarchar(max)" />
         </EntityType>
-        <EntityContainer Name="DataStoreContainer">
+        <EntityContainer Name="MessageNotificationsModelStoreContainer">
           <EntitySet Name="DeliveredMessages" EntityType="Self.DeliveredMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FailedMessages" EntityType="Self.FailedMessages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InboundMessages" EntityType="Self.InboundMessages" Schema="dbo" store:Type="Tables" />
@@ -46,7 +46,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="MessageNotificationsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="DeliveredMessage">
           <Key>
             <PropertyRef Name="Id" />
@@ -62,7 +62,7 @@
           </Key>
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="MessageId" Type="Guid" />
-          <Property Name="Accoutnid" Type="Guid" />
+          <Property Name="AccountId" Type="Guid" />
           <Property Name="OccurredAt" Type="DateTime" Precision="3" />
           <Property Name="FailureCode" Type="Int32" />
           <Property Name="FailureDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -79,7 +79,7 @@
           <Property Name="Sender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Recipient" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityContainer Name="MessageNotificationsEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="MessageNotificationsContext" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DeliveredMessages" EntityType="Self.DeliveredMessage" />
           <EntitySet Name="FailedMessages" EntityType="Self.FailedMessage" />
           <EntitySet Name="InboundMessages" EntityType="Self.InboundMessage" />
@@ -89,9 +89,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DataStoreContainer" CdmEntityContainer="MessageNotificationsEntities">
+        <EntityContainerMapping StorageEntityContainer="MessageNotificationsModelStoreContainer" CdmEntityContainer="MessageNotificationsContext">
           <EntitySetMapping Name="DeliveredMessages">
-            <EntityTypeMapping TypeName="Data.DeliveredMessage">
+            <EntityTypeMapping TypeName="MessageNotificationsModel.DeliveredMessage">
               <MappingFragment StoreEntitySet="DeliveredMessages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MessageId" ColumnName="MessageId" />
@@ -101,11 +101,11 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="FailedMessages">
-            <EntityTypeMapping TypeName="Data.FailedMessage">
+            <EntityTypeMapping TypeName="MessageNotificationsModel.FailedMessage">
               <MappingFragment StoreEntitySet="FailedMessages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MessageId" ColumnName="MessageId" />
-                <ScalarProperty Name="Accoutnid" ColumnName="Accoutnid" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
                 <ScalarProperty Name="OccurredAt" ColumnName="OccurredAt" />
                 <ScalarProperty Name="FailureCode" ColumnName="FailureCode" />
                 <ScalarProperty Name="FailureDetail" ColumnName="FailureDetail" />
@@ -114,7 +114,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="InboundMessages">
-            <EntityTypeMapping TypeName="Data.InboundMessage">
+            <EntityTypeMapping TypeName="MessageNotificationsModel.InboundMessage">
               <MappingFragment StoreEntitySet="InboundMessages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="MessageId" ColumnName="MessageId" />
