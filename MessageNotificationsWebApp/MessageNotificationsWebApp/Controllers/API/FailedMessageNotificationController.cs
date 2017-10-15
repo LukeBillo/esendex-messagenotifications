@@ -10,26 +10,26 @@ using MessageNotificationsWebApp.Models.ViewModels;
 
 namespace MessageNotificationsWebApp.Controllers.API
 {
-    [RoutePrefix("api/InboundMessages")]
-    public class InboundMessageNotificationController : ApiController
+    [RoutePrefix("api/FailedMessages")]
+    public class FailedMessageNotificationController : ApiController
     {
         [Route("")]
-        public IEnumerable<InboundMessageViewModel> Get()
+        public IEnumerable<FailedMessageViewModel> Get()
         {
             using (var context = new MessageNotificationsContext())
             {
-                var inboundMessages = context.InboundMessages.ToList();
+                var failedMessages = context.FailedMessages.ToList();
 
-                return inboundMessages.Select(inboundMessage => new InboundMessageViewModel(inboundMessage)).ToList();
+                return failedMessages.Select(failedMessage => new FailedMessageViewModel(failedMessage)).ToList();
             }
         }
 
         [Route("")]
-        public HttpResponseMessage Post([FromBody]InboundMessageViewModel inboundMessage)
+        public HttpResponseMessage Post([FromBody]FailedMessageViewModel failedMessage)
         {
             using (var context = new MessageNotificationsContext())
             {
-                context.InboundMessages.Add(new InboundMessage(inboundMessage));
+                context.FailedMessages.Add(new FailedMessage(failedMessage));
                 context.SaveChanges();
             }
 

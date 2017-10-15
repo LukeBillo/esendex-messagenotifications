@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Data.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="DeliveredMessages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MessageId" Type="uniqueidentifier" />
+          <Property Name="AccountId" Type="uniqueidentifier" />
+          <Property Name="OccurredAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FailedMessages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MessageId" Type="uniqueidentifier" />
+          <Property Name="Accoutnid" Type="uniqueidentifier" />
+          <Property Name="OccurredAt" Type="datetime" />
+          <Property Name="FailureCode" Type="int" />
+          <Property Name="FailureDetail" Type="nvarchar(max)" />
+          <Property Name="IsPermanentFailure" Type="bit" />
+        </EntityType>
+        <EntityType Name="InboundMessages">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MessageId" Type="uniqueidentifier" />
+          <Property Name="AccountId" Type="uniqueidentifier" />
+          <Property Name="MessageText" Type="nvarchar(max)" />
+          <Property Name="Sender" Type="nvarchar(max)" />
+          <Property Name="Recipient" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="DataStoreContainer">
+          <EntitySet Name="DeliveredMessages" EntityType="Self.DeliveredMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FailedMessages" EntityType="Self.FailedMessages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InboundMessages" EntityType="Self.InboundMessages" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Data" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="DeliveredMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MessageId" Type="Guid" />
+          <Property Name="AccountId" Type="Guid" />
+          <Property Name="OccurredAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="FailedMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MessageId" Type="Guid" />
+          <Property Name="Accoutnid" Type="Guid" />
+          <Property Name="OccurredAt" Type="DateTime" Precision="3" />
+          <Property Name="FailureCode" Type="Int32" />
+          <Property Name="FailureDetail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsPermanentFailure" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="InboundMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MessageId" Type="Guid" />
+          <Property Name="AccountId" Type="Guid" />
+          <Property Name="MessageText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Recipient" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="MessageNotificationsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="DeliveredMessages" EntityType="Self.DeliveredMessage" />
+          <EntitySet Name="FailedMessages" EntityType="Self.FailedMessage" />
+          <EntitySet Name="InboundMessages" EntityType="Self.InboundMessage" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataStoreContainer" CdmEntityContainer="MessageNotificationsEntities">
+          <EntitySetMapping Name="DeliveredMessages">
+            <EntityTypeMapping TypeName="Data.DeliveredMessage">
+              <MappingFragment StoreEntitySet="DeliveredMessages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="OccurredAt" ColumnName="OccurredAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FailedMessages">
+            <EntityTypeMapping TypeName="Data.FailedMessage">
+              <MappingFragment StoreEntitySet="FailedMessages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="Accoutnid" ColumnName="Accoutnid" />
+                <ScalarProperty Name="OccurredAt" ColumnName="OccurredAt" />
+                <ScalarProperty Name="FailureCode" ColumnName="FailureCode" />
+                <ScalarProperty Name="FailureDetail" ColumnName="FailureDetail" />
+                <ScalarProperty Name="IsPermanentFailure" ColumnName="IsPermanentFailure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InboundMessages">
+            <EntityTypeMapping TypeName="Data.InboundMessage">
+              <MappingFragment StoreEntitySet="InboundMessages">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="AccountId" ColumnName="AccountId" />
+                <ScalarProperty Name="MessageText" ColumnName="MessageText" />
+                <ScalarProperty Name="Sender" ColumnName="Sender" />
+                <ScalarProperty Name="Recipient" ColumnName="Recipient" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -10,26 +10,26 @@ using MessageNotificationsWebApp.Models.ViewModels;
 
 namespace MessageNotificationsWebApp.Controllers.API
 {
-    [RoutePrefix("api/InboundMessages")]
-    public class InboundMessageNotificationController : ApiController
+    [RoutePrefix("api/DeliveredMessages")]
+    public class DeliveredMessageNotificationController : ApiController
     {
         [Route("")]
-        public IEnumerable<InboundMessageViewModel> Get()
+        public IEnumerable<DeliveredMessageViewModel> Get()
         {
             using (var context = new MessageNotificationsContext())
             {
-                var inboundMessages = context.InboundMessages.ToList();
+                var deliveredMessages = context.DeliveredMessages.ToList();
 
-                return inboundMessages.Select(inboundMessage => new InboundMessageViewModel(inboundMessage)).ToList();
+                return deliveredMessages.Select(deliveredMessage => new DeliveredMessageViewModel(deliveredMessage)).ToList();
             }
         }
 
         [Route("")]
-        public HttpResponseMessage Post([FromBody]InboundMessageViewModel inboundMessage)
+        public HttpResponseMessage Post([FromBody]DeliveredMessageViewModel deliveredMessage)
         {
             using (var context = new MessageNotificationsContext())
             {
-                context.InboundMessages.Add(new InboundMessage(inboundMessage));
+                context.DeliveredMessages.Add(new DeliveredMessage(deliveredMessage));
                 context.SaveChanges();
             }
 
