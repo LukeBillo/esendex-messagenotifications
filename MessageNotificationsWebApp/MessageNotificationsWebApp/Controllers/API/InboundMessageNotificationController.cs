@@ -18,6 +18,8 @@ namespace MessageNotificationsWebApp.Controllers.API
         {
             using (var context = new MessageNotificationsContext())
             {
+                context.Database.Connection.Open();
+
                 var inboundMessages = context.InboundMessages.ToList();
 
                 return inboundMessages.Select(inboundMessage => new InboundMessageViewModel(inboundMessage)).ToList();
@@ -29,6 +31,8 @@ namespace MessageNotificationsWebApp.Controllers.API
         {
             using (var context = new MessageNotificationsContext())
             {
+                context.Database.Connection.Open();
+
                 context.InboundMessages.Add(new InboundMessage(inboundMessage));
                 context.SaveChanges();
             }

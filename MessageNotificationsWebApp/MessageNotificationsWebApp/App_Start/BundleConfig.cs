@@ -23,6 +23,13 @@ namespace MessageNotificationsWebApp
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                    "~/Scripts/angular.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/notifications-app")
+                .IncludeDirectory("~/Client/controllers", "*.js", true)
+                .IncludeDirectory("~/Client/services", "*.js", true));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));

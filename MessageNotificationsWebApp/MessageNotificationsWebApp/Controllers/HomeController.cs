@@ -13,22 +13,5 @@ namespace MessageNotificationsWebApp.Controllers
         {
             return View();
         }
-
-        public ActionResult About()
-        {
-            using (var context = new MessageNotificationsContext())
-            {
-                ViewBag.InboundMessages = context.InboundMessages.ToList();
-            }
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
     }
 }
